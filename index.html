@@ -3,153 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IPUNGG SHOP</title>
+<title>iQC Chat Web</title>
 <style>
-:root{
-  --accent:#1e90ff; /* biru neon */
-  --accent-hover:#63b3ed;
-  --text:#f0f0f0;
-  --muted:#a5adc6;
-  --border:rgba(255,255,255,0.1);
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif;font-weight:bold;}
-body, html{height:100%;overflow-x:hidden;}
-video#bg-video{
-  position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:0.6;
-}
-.container{max-width:980px;margin:60px auto;padding:20px;}
-header{text-align:center;color:white;margin-bottom:20px;position:relative;}
-.profile-img{width:140px;height:140px;border-radius:50%;object-fit:cover;border:4px solid white;margin-bottom:10px;}
-.hamburger{position:absolute;top:20px;right:20px;font-size:24px;cursor:pointer;color:white;}
-.menu{display:none;position:absolute;top:60px;right:20px;background:rgba(0,0,0,0.7);border-radius:14px;padding:10px;}
-.menu a{display:block;padding:8px 12px;color:white;text-decoration:none;border-radius:10px;margin-bottom:4px;}
-.menu a:hover{background:var(--accent-hover);}
-h1{font-size:28px;margin-bottom:6px;}
-p{font-weight:bold;margin-bottom:4px;}
-.content h2{color:var(--accent);margin-bottom:20px;font-weight:bold;}
-.product{
-  background:rgba(0,0,0,0.6);
-  border-radius:14px;
-  padding:18px;
-  margin-bottom:20px;
-  text-align:left;
-  transition:transform 0.2s ease, box-shadow 0.2s ease;
-}
-.product:hover{transform:translateY(-3px);box-shadow:0 0 15px var(--accent);}
-.product ul{padding-left:18px;margin-top:10px;}
-.product ul li{margin-bottom:6px;}
-.price{color:var(--accent);font-weight:bold;margin-top:8px;}
-.order-btn{
-  display:block;
-  margin-top:12px;
-  padding:12px 24px;
-  background:var(--accent);
-  color:#111;
-  font-weight:bold;
-  border-radius:12px;
-  text-decoration:none;
-  text-align:center;
-  transition:all 0.2s ease;
-}
-.order-btn:hover{transform:translateY(-2px);box-shadow:0 0 20px var(--accent);}
-footer{text-align:center;color:var(--muted);margin-top:30px;font-size:.9rem;}
+  /* Reset */
+  * { box-sizing: border-box; margin:0; padding:0; font-family: 'Inter', sans-serif; }
+
+  body {
+    background: linear-gradient(135deg,#1a1a1a,#111827);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  /* Jam & teks awal */
+  .iqc-header {
+    width: 100%;
+    max-width: 420px;
+    padding: 16px;
+    text-align: center;
+    font-weight: bold;
+    background: rgba(0,0,0,0.5);
+    border-bottom: 1px solid #333;
+    position: sticky;
+    top:0;
+    z-index: 10;
+  }
+  .iqc-header span { display:block; font-size: 18px; margin-bottom:4px; }
+  .iqc-header .time { font-size:14px; opacity:0.7; }
+
+  /* Chat container */
+  .iqc-chat {
+    width: 100%;
+    max-width: 420px;
+    flex:1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Balon chat */
+  .iqc-message {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    position: relative;
+    display: inline-block;
+    word-wrap: break-word;
+  }
+
+  .iqc-message.received {
+    background: rgba(60,60,60,0.8);
+    align-self: flex-start;
+    color: #e5e7eb;
+  }
+
+  .iqc-message.sent {
+    background: linear-gradient(135deg,#3b82f6,#60a5fa);
+    align-self: flex-end;
+    color: #111;
+  }
+
+  .iqc-time {
+    font-size: 10px;
+    opacity: 0.6;
+    margin-top: 2px;
+    text-align: right;
+  }
+
+  /* Input area */
+  .iqc-input {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    border-top: 1px solid #333;
+  }
+  .iqc-input input {
+    flex:1;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: none;
+    outline:none;
+    background: rgba(255,255,255,0.1);
+    color:#fff;
+  }
+  .iqc-input button {
+    margin-left:8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border:none;
+    background:#3b82f6;
+    color:#fff;
+    cursor:pointer;
+    font-weight:bold;
+  }
+
+  /* Scrollbar */
+  .iqc-chat::-webkit-scrollbar { width: 6px; }
+  .iqc-chat::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
 </style>
 </head>
 <body>
 
-<!-- BACKGROUND VIDEO -->
-<video id="bg-video" autoplay loop muted>
-  <source src="https://files.catbox.moe/7l4q0q.mp4" type="video/mp4">
-</video>
+<!-- Header teks & jam -->
+<div class="iqc-header">
+  <span>Selamat Datang di iQC Web</span>
+  <span class="time" id="iqc-time"></span>
+</div>
 
-<!-- MUSIC AUTOPLAY -->
-<audio id="bgm" loop>
-  <source src="https://files.catbox.moe/kfyzde.mp3" type="audio/mpeg">
-</audio>
+<!-- Chat area -->
+<div class="iqc-chat" id="iqc-chat">
+  <div class="iqc-message received">
+    <div class="iqc-text">iQC Screenshot</div>
+    <div class="iqc-time" id="msg1-time">--:--</div>
+  </div>
+</div>
+
+<!-- Input area -->
+<div class="iqc-input">
+  <input type="text" id="iqc-input" placeholder="Ketik pesan...">
+  <button onclick="sendMessage()">Kirim</button>
+</div>
+
 <script>
-window.addEventListener('load',()=>{
-  const bgm=document.getElementById('bgm');
-  bgm.play().catch(()=>{console.log('Autoplay blocked');});
-});
-function toggleMenu(){
-  const menu=document.getElementById('menu');
-  menu.style.display=menu.style.display==='block'?'none':'block';
-}
+  // Set jam di header & chat
+  function updateTime(){
+    const now = new Date();
+    const h = now.getHours().toString().padStart(2,'0');
+    const m = now.getMinutes().toString().padStart(2,'0');
+    const timeStr = h+':'+m;
+    document.getElementById('iqc-time').innerText = timeStr;
+    document.getElementById('msg1-time').innerText = timeStr;
+  }
+  setInterval(updateTime, 1000);
+  updateTime();
+
+  const chat = document.getElementById('iqc-chat');
+  const input = document.getElementById('iqc-input');
+
+  function sendMessage(){
+    const text = input.value.trim();
+    if(!text) return;
+    const now = new Date();
+    const h = now.getHours().toString().padStart(2,'0');
+    const m = now.getMinutes().toString().padStart(2,'0');
+
+    const msg = document.createElement('div');
+    msg.classList.add('iqc-message','sent');
+    msg.innerHTML = `<div class="iqc-text">${text}</div>
+                     <div class="iqc-time">${h}:${m}</div>`;
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+    input.value = '';
+  }
 </script>
 
-<div class="container">
-<header>
-  <div class="hamburger" onclick="toggleMenu()">☰</div>
-  <div id="menu" class="menu">
-    <a href="https://wa.me/6283840810226" target="_blank">WhatsApp</a>
-    <a href="https://t.me/ipungg26" target="_blank">Telegram</a>
-  </div>
-  <img src="https://files.catbox.moe/fpd14u.jpg" alt="Profil" class="profile-img">
-  <h1>Saeful Rahman</h1>
-  <p>Umur: 15 Tahun</p>
-  <p>Toko Hosting Termurah 🇮🇩</p>
-  <a href="https://whatsapp.com/channel/0029VbC9AsB3wtazd1Pz2k1u" target="_blank" class="order-btn" style="display:inline-block;margin-right:10px;">📢 Channel Info</a>
-  <a href="https://payment-ipungg.vercel.app" target="_blank" class="order-btn" style="display:inline-block;">💳 Payment</a>
-</header>
-
-<div class="content">
-<h2>🛒 Produk Saya</h2>
-
-<div class="product">
-<h3>🤖 Asuna Yuuki AI MD v8.5.0</h3>
-<ul>
-<li>1000+ fitur lengkap (include premium apikey)</li>
-<li>Menu stiker, maker, tofigure, dll</li>
-<li>Sewa bot & premium otomatis</li>
-<li>Set menu (button & no button)</li>
-<li>Auto downloader, anti tag SW</li>
-<li>Anti bot, antilink, dll</li>
-<li>Menu store & sistem list katalog</li>
-<li>Smart auto AI VN & text (session)</li>
-<li>Rapi & bersih (rename 1 file)</li>
-<li>Update & maintenance rutin</li>
-<li>Anti over-limit / bad session</li>
-<li>Online 24/7</li>
-</ul>
-<div class="price">Rp 60.000</div>
-<a class="order-btn" href="https://wa.me/6283840810226" target="_blank">Order Asuna AI</a>
-</div>
-
-<div class="product">
-<h3>🤖 Paket Sewa Bot</h3>
-<ul>
-<li>7K / Minggu</li>
-<li>15K / Bulan</li>
-<li>25K / 2 Bulan</li>
-<li>30K / Permanen</li>
-<li>50K / Bot Permanen</li>
-</ul>
-<a class="order-btn" href="https://wa.me/6283840810226" target="_blank">Order Sewa Bot</a>
-</div>
-
-<div class="product">
-<h3>💻 Paket VPS</h3>
-<ul>
-<li>RAM 16GB | Core 4 → 15K</li>
-<li>RAM 16GB | Core 8 → 20K</li>
-</ul>
-<a class="order-btn" href="https://wa.me/6283840810226" target="_blank">Order VPS</a>
-</div>
-
-<div class="product">
-<h3>🧩 Panel Bot & AIO</h3>
-<ul>
-<li>Panel Unlimited — 5K</li>
-<li>Reseller Panel — 8K</li>
-<li>Admin Panel — 10K</li>
-<li>Partner Panel — 12K</li>
-<li>Owner Panel — 15K</li>
-</ul>
-<a class="order-btn" href="https://wa.me/6283840810226" target="_blank">Order Panel</a>
-</div>
-
-</div>
-<footer>© 2026 IPUNGG SHOP 👩‍💻</footer>
-</div>
 </body>
   </html>
