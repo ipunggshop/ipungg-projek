@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPUNGG SHOP</title>
+<style>
+:root{
+  --accent:#1e90ff; /* biru neon */
+  --accent-hover:#63b3ed;
+  --text:#f0f0f0;
+  --muted:#a5adc6;
+  --border:rgba(255,255,255,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif;font-weight:bold;}
+body, html{height:100%;overflow-x:hidden;}
+video#bg-video{
+  position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:0.6;
+}
+.container{max-width:980px;margin:60px auto;padding:20px;}
+header{text-align:center;color:white;margin-bottom:20px;position:relative;}
+.profile-img{width:140px;height:140px;border-radius:50%;object-fit:cover;border:4px solid white;margin-bottom:10px;}
+.hamburger{position:absolute;top:20px;right:20px;font-size:24px;cursor:pointer;color:white;}
+.menu{display:none;position:absolute;top:60px;right:20px;background:rgba(0,0,0,0.7);border-radius:14px;padding:10px;}
+.menu a{display:block;padding:8px 12px;color:white;text-decoration:none;border-radius:10px;margin-bottom:4px;}
+.menu a:hover{background:var(--accent-hover);}
+h1{font-size:28px;margin-bottom:6px;}
+p{font-weight:bold;margin-bottom:4px;}
+.content h2{color:var(--accent);margin-bottom:20px;font-weight:bold;}
+.product{
+  background:rgba(0,0,0,0.6);
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:20px;
+  text-align:left;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+.product:hover{transform:translateY(-3px);box-shadow:0 0 15px var(--accent);}
+.product ul{padding-left:18px;margin-top:10px;}
+.product ul li{margin-bottom:6px;}
+.price{color:var(--accent);font-weight:bold;margin-top:8px;}
+.order-btn{
+  display:block;
+  margin-top:12px;
+  padding:12px 24px;
+  background:var(--accent);
+  color:#111;
+  font-weight:bold;
+  border-radius:12px;
+  text-decoration:none;
+  text-align:center;
+  transition:all 0.2s ease;
+}
+.order-btn:hover{transform:translateY(-2px);box-shadow:0 0 20px var(--accent);}
+footer{text-align:center;color:var(--muted);margin-top:30px;font-size:.9rem;}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND VIDEO -->
+<video id="bg-video" autoplay loop muted>
+  <source src="https://files.catbox.moe/7l4q0q.mp4" type="video/mp4">
+</video>
+
+<!-- MUSIC AUTOPLAY -->
+<audio id="bgm" loop>
+  <source src="https://files.catbox.moe/kfyzde.mp3" type="audio/mpeg">
+</audio>
+<script>
+window.addEventListener('load',()=>{
+  const bgm=document.getElementById('bgm');
+  bgm.play().catch(()=>{console.log('Autoplay blocked');});
+});
+function toggleMenu(){
+  const menu=document.getElementById('menu');
+  menu.style.display=menu.style.display==='block'?'none':'block';
+}
+</script>
+
+<div class="container">
+<header>
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <div id="menu" class="menu">
+    <a href="https://wa.me/6283840810226" target="_blank">WhatsApp</a>
+    <a href="https://t.me/ipungg26" target="_blank">Telegram</a>
+  </div>
+  <img src="https://files.catbox.moe/fpd14u.jpg" alt="Profil" class="profile-img">
+  <h1>Saeful Rahman</h1>
+  <p>Umur: 15 Tahun</p>
+  <p>Toko Hosting Termurah 🇮🇩</p>
+  <a href="https://whatsapp.com/channel/0029VbC9AsB3wtazd1Pz2k1u" target="_blank" class="order-btn" style="display:inline-block;margin-right:10px;">📢 Channel Info</a>
+  <a href="https://payment-ipungg.vercel.app" target="_blank" class="order-btn" style="display:inline-block;">💳 Payment</a>
+</header>
+
+<div class="content">
+<h2>🛒 Produk Saya</h2>
+
+<div class="product">
+<h3>🤖 Asuna Yuuki AI MD v8.5.0</h3>
+<ul>
+<li>1000+ fitur lengkap (include premium apikey)</li>
+<li>Menu stiker, maker, tofigure, dll</li>
+<li>Sewa bot & premium otomatis</li>
+<li>Set menu (button & no button)</li>
+<li>Auto downloader, anti tag SW</li>
+<li>Anti bot, antilink, dll</li>
+<li>Menu store & sistem list katalog</li>
+<li>Smart auto AI VN & text (session)</li>
+<li>Rapi & bersih (rename 1 file)</li>
+<li>Update & maintenance rutin</li>
+<li>Anti over-limit / bad session</li>
+<li>Online 24/7</li>
+</ul>
+<div class="price">Rp 60.000</div>
+<a class="order-btn" href="https://wa.me/6283840810226" target="_blank">Order Asuna AI</a>
+</div>
+
+<div class="product">
+<h3>🤖 Paket Sewa Bot</h3>
+<ul>
+<li>7K / Minggu</li>
+<li>15K / Bulan</li>
+<li>25K / 2 Bulan</li>
+<li>30K / Permanen</li>
+<li>50K / Bot Permanen</li>
+</ul>
+<a class="order-btn" href="https://wa.me/6283840810226" target="_blank">Order Sewa Bot</a>
+</div>
+
+<div class="product">
+<h3>💻 Paket VPS</h3>
+<ul>
+<li>RAM 16GB | Core 4 → 15K</li>
+<li>RAM 16GB | Core 8 → 20K</li>
+</ul>
+<a class="order-btn" href="https://wa.me/6283840810226" target="_blank">Order VPS</a>
+</div>
+
+<div class="product">
+<h3>🧩 Panel Bot & AIO</h3>
+<ul>
+<li>Panel Unlimited — 5K</li>
+<li>Reseller Panel — 8K</li>
+<li>Admin Panel — 10K</li>
+<li>Partner Panel — 12K</li>
+<li>Owner Panel — 15K</li>
+</ul>
+<a class="order-btn" href="https://wa.me/6283840810226" target="_blank">Order Panel</a>
+</div>
+
+</div>
+<footer>© 2026 IPUNGG SHOP 👩‍💻</footer>
+</div>
+</body>
+  </html>
